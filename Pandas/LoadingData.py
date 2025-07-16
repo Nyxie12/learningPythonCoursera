@@ -1,11 +1,14 @@
+import requests
 import pandas as pd
 
-songs = {'Album': ['Thriller', 'Back in Black', 'The Dark Side of the Moon', 'The Bodyguard', 'Bat Out of Hell'],
-         'Released': [1982, 1980, 1973, 1992, 1977],
-         'Length': ['00:42:19', '00:42:11', '00:42:49', '00:57:44', '00:46:33']}
+filename = "https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/LXjSAttmoxJfEG6il1Bqfw/Product-sales.csv"
 
-sf = pd.DataFrame(songs)
+async def download(url, filename):
+    reponse = requests.get(url)
+    if reponse.status_code == 200:
+        with open(filename, 'wb') as f:
+            f.write(reponse.content)
 
-print(sf.head())
-print(sf[['Released']])
-print(sf.iloc[0,0])
+download(filename, 'Product-sales.csv')
+df = pd.read_csv('Product-sales.csv')
+
