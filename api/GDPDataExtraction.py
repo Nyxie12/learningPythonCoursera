@@ -18,3 +18,7 @@ df = tables[3]
 df.columns = range(df.shape[1])
 
 df = df[[0,2]]
+
+df = df.iloc[1:11,:]
+
+df.columns = ['Country', 'GDP (Million USD)']
